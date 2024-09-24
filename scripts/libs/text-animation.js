@@ -1,4 +1,4 @@
-//任意のDOM内のテキストを分割、加工するクラス（アニメーションを付与するための下準備）
+//アニメーション付与前の下準備（HTMLを整える）クラス
 class TextAnimation {
     constructor(el) {
         this.DOM = {};
@@ -17,15 +17,15 @@ class TextAnimation {
     }
 }
 
-//TextAnimationで加工したHTMLに対してアニメーションを付与するクラス
+//実際にアニメーションを付与するクラス
 class TweenTextAnimation extends TextAnimation {
     constructor(el) {
         super(el); //加工済みのhtmlがthis.DOM.elに入る ← 1
-        this.DOM.chars = this.DOM.el.querySelectorAll('.char'); //1で作った要素内の子要素をすべて取得
+        this.DOM.chars = this.DOM.el.querySelectorAll('.char'); //1の子要素をすべて取得
     }
     animate() {
-        this.DOM.el.classList.add('inview'); //親要素に
-        this.DOM.chars.forEach((c, i) => {   //子要素たちに
+        this.DOM.el.classList.add('inview'); //親要素に設定
+        this.DOM.chars.forEach((c, i) => {   //子要素に設定
             gsap.to(c, .6, {     //かかる時間
                 ease: Back.easeOut,
                 delay: i * .05,  //遅延時間
